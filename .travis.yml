@@ -1,8 +1,16 @@
 language: ruby
     rvm:
     - 2.2.1
+    branches:
+      except:
+      - master
+      - experiment
+    # changes from here
+    services:
+    - memcached
     env:
-    - DB=test/integration/books.sqlite
+    - DB=test/integration/books.sqlite && MCACHE=localhost:11211
+    # changes to here
     before_script:
     - touch $DB && ruby test/integration/setup_datastores.rb
     script: 
