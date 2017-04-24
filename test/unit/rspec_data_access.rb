@@ -15,6 +15,11 @@ describe DataAccess do
   end
 
   describe '#isbnSearch' do
+    describe "ISBN Search" do
+       before(:each) do
+          dBase = Sequel.sqlite(ENV['DB'] )
+          @sqlp = SQLitePersistence.new dBase
+       end
      context "required book is not in the remote cache" do
          it "should get it from the database and put it in both caches" do
             expect(@sqlite_database).to receive(:isbnSearch).with('1111').and_return(@book1)
